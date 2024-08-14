@@ -1,7 +1,7 @@
 <h1 align="center"><img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="30px"/> Hi, I’m Khai</h1>
 <h3 align="center">Passionate Flutter Developer | Full-Stack Enthusiast</h3>
 <div id="badges" align="center">
-  <a href="https://www.linkedin.com/in/khairul989/"> <img src="https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn Badge"/> </a>
+  <a href="https://www.linkedin.com/in/muhammad-khairul-azhar-b2b2b81b3/"> <img src="https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn Badge"/> </a>
   <a href="https://github.com/Khairul989"><img src="https://img.shields.io/github/followers/Khairul989?label=Followers&style=social" alt="GitHub Followers Badge"/></a>
   <br>
   <img src="https://komarev.com/ghpvc/?username=khairul989&style=for-the-badge&color=blue" alt=""/>
@@ -27,7 +27,7 @@
 <a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"> <kbd><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="TypeScript" width="40" height="40"/></kbd> </a>
 <a href="https://firebase.google.com/" target="_blank" rel="noreferrer"> <kbd><img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" alt="Firebase" width="40" height="40"/></kbd> </a>
 <a href="https://www.postgresql.org/" target="_blank" rel="noreferrer"> <kbd><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" alt="PostgreSQL" width="40" height="40"/></kbd> </a>
-<a href="https://expressjs.com/" target="_blank" rel="noreferrer"> <kbd><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="Express.js" width="40" height="40"/></kbd> </a>
+<a href="https://expressjs.com/" target="_blank" rel="noreferrer"> <kbd><img src="https://w7.pngwing.com/pngs/558/166/png-transparent-node-js-javascript-react-express-js-linux-foundation-mongodb-icons-angle-text-rectangle-thumbnail.png" alt="Express.js" width="40" height="40"/></kbd> </a>
 <a href="https://spring.io/projects/spring-boot" target="_blank" rel="noreferrer"> <kbd><img src="https://www.vectorlogo.zone/logos/springio/springio-icon.svg" alt="Spring Boot" width="40" height="40"/></kbd> </a>
 <a href="https://www.mysql.com/" target="_blank" rel="noreferrer"> <kbd><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="MySQL" width="40" height="40"/></kbd> </a>
 </p>
