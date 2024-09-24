@@ -9,24 +9,19 @@
 <p align="center"> <a href="https://github.com/ryo-ma/github-profile-trophy"><kbd><img src="https://github-profile-trophy.vercel.app/?username=khairul989&theme=onedark&row=2&column=4&margin-w=15&margin-h=15" alt="khairul989" /></kbd></a> </p>
 🌱 I’m currently working with Flutter to build mobile apps and exploring TypeScript for enhanced backend development.
 
-💬 Ask me about Flutter, Java Spring Boot, Next.js, NestJS, React.js, Express.js, Firebase, SQL, PostgreSQL.
+💬 Ask me about Flutter, Java Spring Boot, Next.js, NestJS, React.js, Express.js, Firebase, SQL.
 
 📫 How to reach me: muhdkhairulazhar989@gmail.com
 
 ⚡ Fun fact: If the code runs perfectly, only my compiler and I know how that happened!
 
-<h3 align="left">Connect with me:</h3>
-<p align="left">
-<a href="https://stackoverflow.com/users/khairul989" target="blank"><kbd><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/stack-overflow.svg" alt="Stack Overflow" height="30" width="40" /></kbd></a>
-<a href="https://www.instagram.com/khairul989/" target="blank"><kbd><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="Instagram" height="30" width="40" /></kbd></a>
-</p>
 <h3 align="left">Languages and Tools:</h3>
 <p align="left">
 <a href="https://flutter.dev" target="_blank" rel="noreferrer"> <kbd><img src="https://www.vectorlogo.zone/logos/flutterio/flutterio-icon.svg" alt="Flutter" width="40" height="40"/></kbd> </a>
+<a href="https://laravel.com/docs/11.x" target="_blank" rel="noreferrer"> <kbd><img src="https://www.datanethosting.com/wp-content/uploads/2021/08/laravel_banner-300x300-1.webp" alt="Laravel" width="40" height="40"/></kbd> </a>
 <a href="https://www.java.com" target="_blank" rel="noreferrer"> <kbd><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="Java" width="40" height="40"/></kbd> </a>
 <a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"> <kbd><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="TypeScript" width="40" height="40"/></kbd> </a>
 <a href="https://firebase.google.com/" target="_blank" rel="noreferrer"> <kbd><img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" alt="Firebase" width="40" height="40"/></kbd> </a>
-<a href="https://www.postgresql.org/" target="_blank" rel="noreferrer"> <kbd><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" alt="PostgreSQL" width="40" height="40"/></kbd> </a>
 <a href="https://expressjs.com/" target="_blank" rel="noreferrer"> <kbd><img src="https://w7.pngwing.com/pngs/558/166/png-transparent-node-js-javascript-react-express-js-linux-foundation-mongodb-icons-angle-text-rectangle-thumbnail.png" alt="Express.js" width="40" height="40"/></kbd> </a>
 <a href="https://spring.io/projects/spring-boot" target="_blank" rel="noreferrer"> <kbd><img src="https://www.vectorlogo.zone/logos/springio/springio-icon.svg" alt="Spring Boot" width="40" height="40"/></kbd> </a>
 <a href="https://www.mysql.com/" target="_blank" rel="noreferrer"> <kbd><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="MySQL" width="40" height="40"/></kbd> </a>
