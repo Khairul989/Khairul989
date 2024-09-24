@@ -7,9 +7,14 @@
   <img src="https://komarev.com/ghpvc/?username=khairul989&style=for-the-badge&color=blue" alt=""/>
 </div>
 <p align="center"> <a href="https://github.com/ryo-ma/github-profile-trophy"><kbd><img src="https://github-profile-trophy.vercel.app/?username=khairul989&theme=onedark&row=2&column=4&margin-w=15&margin-h=15" alt="khairul989" /></kbd></a> </p>
-🌱 I’m currently working with Flutter to build mobile apps and exploring TypeScript for enhanced backend development.
 
-💬 Ask me about Flutter, Java Spring Boot, Next.js, NestJS, React.js, Express.js, Firebase, SQL.
+👨‍💻 Senior Engineer specializing in Flutter: Building high-quality mobile apps with Flutter, delivering seamless cross-platform experiences.
+
+🌐 Exploring Backend Development: Expanding skills in TypeScript and Laravel to enhance backend solutions.
+
+💡 Expertise: Deep knowledge in Java Spring Boot, Next.js, NestJS, React.js, Express.js, Firebase, and SQL.
+
+💬 Ask me about: Anything related to Flutter development, backend integrations, or full-stack technologies.
 
 📫 How to reach me: muhdkhairulazhar989@gmail.com
 
