@@ -17,12 +17,6 @@
   <img src="https://komarev.com/ghpvc/?username=khairul989&style=for-the-badge&color=0366D6" alt="Profile Views"/>
 </p>
 
-## 👀 Profile Views
-
-<div align="center">
-  <img src="https://profile-counter.glitch.me/{khairul989}/count.svg" alt="Visitor Count" />
-</div>
-
 ## 💫 About Me
 
 - 👨‍💻 **Senior Engineer** specializing in Flutter development
@@ -60,18 +54,18 @@
   </a>
 </div>
 
+## 🔥 Contribution Streak
+
+<div align="center">
+  
+[![GitHub Streak](https://github-readme-streak-stats-eight.vercel.app/?user=Khairul989&theme=tokyonight)](https://git.io/streak-stats)
+
+</div>
+
 ## 🏆 GitHub Trophies
 
 <div align="center">
   <img src="https://github-profile-trophy.vercel.app/?username=khairul989&theme=darkhub&no-frame=true&row=1&column=7&margin-w=15&margin-h=15" alt="GitHub Trophies" />
-</div>
-
-## 🎵 Spotify Now Playing
-
-<div align="center">
-  <a href="https://spotify-github-profile.vercel.app/api/view?uid=31oc4onnfiqsqpts3gxtondqswmu&redirect=true">
-    <img src="https://spotify-github-profile.vercel.app/api/view?uid=31oc4onnfiqsqpts3gxtondqswmu&cover_image=true&theme=novatorem&show_offline=false&background_color=121212&interchange=false&bar_color=53b14f&bar_color_cover=false" alt="Spotify Now Playing" />
-  </a>
 </div>
 
 ## 💭 Programming Quote
