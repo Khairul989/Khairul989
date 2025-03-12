@@ -17,6 +17,12 @@
   <img src="https://komarev.com/ghpvc/?username=khairul989&style=for-the-badge&color=0366D6" alt="Profile Views"/>
 </p>
 
+## 👀 Profile Views
+
+<div align="center">
+  <img src="https://profile-counter.glitch.me/{khairul989}/count.svg" alt="Visitor Count" />
+</div>
+
 ## 💫 About Me
 
 - 👨‍💻 **Senior Engineer** specializing in Flutter development
@@ -48,35 +54,34 @@
 ## 📊 GitHub Stats
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=khairul989&show_icons=true&theme=tokyonight&hide_border=true&count_private=true" alt="GitHub Stats" height="170"/>
-  <img src="https://streak-stats.demolab.com/?user=khairul989&theme=tokyonight&hide_border=true" alt="GitHub Streak" height="170"/>
-</div>
-
-<div align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=khairul989&theme=tokyonight&hide_border=true&layout=compact" alt="Top Languages" />
+  <a href="https://github.com/anuraghazra/github-readme-stats">
+    <img height="180em" src="https://github-readme-stats.vercel.app/api?username=khairul989&show_icons=true&theme=tokyonight&include_all_commits=true&count_private=true"/>
+    <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=khairul989&layout=compact&langs_count=7&theme=tokyonight"/>
+  </a>
 </div>
 
 ## 🏆 GitHub Trophies
 
 <div align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=khairul989&theme=nord&column=7&no-frame=true&margin-w=15&margin-h=15" alt="GitHub Trophies" />
+  <img src="https://github-profile-trophy.vercel.app/?username=khairul989&theme=darkhub&no-frame=true&row=1&column=7&margin-w=15&margin-h=15" alt="GitHub Trophies" />
 </div>
 
-## 📌 Pinned Repositories
+## 💭 Programming Quote
 
 <div align="center">
-  <a href="https://github.com/Khairul989/your-best-repo">
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=khairul989&repo=your-best-repo&theme=tokyonight&hide_border=true" alt="Pinned Repo" />
-  </a>
-  <a href="https://github.com/Khairul989/another-great-repo">
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=khairul989&repo=another-great-repo&theme=tokyonight&hide_border=true" alt="Pinned Repo" />
-  </a>
+  <img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=tokyonight" alt="Programming Quote" />
 </div>
 
-## 📈 Contribution Graph
+## 🐍 Contribution Snake
 
 <div align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=khairul989&theme=tokyo-night&hide_border=true" alt="Contribution Graph" />
+  <img src="https://raw.githubusercontent.com/platane/snk/output/github-contribution-grid-snake.svg" alt="Snake animation" />
+</div>
+
+## 😄 Random Dev Joke
+
+<div align="center">
+  <a href="https://readme-jokes.vercel.app"><img align="center" src="https://readme-jokes.vercel.app/api" alt="README Jokes"></a>
 </div>
 
 ---
