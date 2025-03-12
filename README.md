@@ -17,12 +17,6 @@
   <img src="https://komarev.com/ghpvc/?username=khairul989&style=for-the-badge&color=0366D6" alt="Profile Views"/>
 </p>
 
-## 👀 Profile Views
-
-<div align="center">
-  <img src="https://profile-counter.glitch.me/{khairul989}/count.svg" alt="Visitor Count" />
-</div>
-
 ## 💫 About Me
 
 - 👨‍💻 **Senior Engineer** specializing in Flutter development
