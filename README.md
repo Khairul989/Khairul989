@@ -62,18 +62,6 @@
 
 </div>
 
-## 🏆 GitHub Trophies
-
-<div align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=khairul989&theme=darkhub&no-frame=true&row=1&column=7&margin-w=15&margin-h=15" alt="GitHub Trophies" />
-</div>
-
-## 💭 Programming Quote
-
-<div align="center">
-  <img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=tokyonight" alt="Programming Quote" />
-</div>
-
 ## 🐍 Contribution Snake
 
 <div align="center">
