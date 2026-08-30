@@ -59,19 +59,8 @@ I've been writing code professionally for a while and building side projects for
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=Khairul989&theme=tokyonight"/>
-    <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=Khairul989&theme=default" alt="Profile summary"/>
-  </picture>
-</p>
-
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=Khairul989&theme=tokyonight"/>
-    <img height="200" src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=Khairul989&theme=default" alt="Most used languages"/>
-  </picture>
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=Khairul989&theme=tokyonight"/>
-    <img height="200" src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=Khairul989&theme=default" alt="Contribution stats"/>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Khairul989/Khairul989/output/stats-dark.svg"/>
+    <img src="https://raw.githubusercontent.com/Khairul989/Khairul989/output/stats.svg" alt="Contributions, streaks and languages"/>
   </picture>
 </p>
 
@@ -80,18 +69,9 @@ I've been writing code professionally for a while and building side projects for
     <source media="(prefers-color-scheme: dark)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=Khairul989&theme=tokyonight&utcOffset=8"/>
     <img height="200" src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=Khairul989&theme=default&utcOffset=8" alt="Productive time"/>
   </picture>
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=Khairul989&theme=tokyonight"/>
-    <img height="200" src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=Khairul989&theme=default" alt="Languages by repo"/>
-  </picture>
 </p>
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com/?user=Khairul989&theme=tokyonight&hide_border=true&disable_animations=true"/>
-    <img src="https://streak-stats.demolab.com/?user=Khairul989&theme=default&hide_border=true&disable_animations=true" alt="Streak"/>
-  </picture>
-</p>
+<sub>Cards above are generated daily by a workflow in this repo — no third-party service to go down.</sub>
 
 ---
 

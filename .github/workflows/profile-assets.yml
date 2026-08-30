@@ -1,0 +1,87 @@
+name: Build profile assets
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: profile-assets
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Generate contribution snake
+        continue-on-error: true
+        uses: Platane/snk@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/snake.svg
+            dist/snake-dark.svg?palette=github-dark
+
+      - name: Generate stat cards
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USER_LOGIN: ${{ github.repository_owner }}
+        run: node scripts/build-cards.mjs | tee card-run.log
+
+      - name: Verify the cards say something true
+        run: |
+          set -e
+
+          # Self-hosted cards are required. The snake comes from a third party
+          # and is allowed to be missing without failing the run.
+          for f in dist/stats.svg dist/stats-dark.svg; do
+            [ -s "$f" ] || { echo "MISSING OR EMPTY: $f"; exit 1; }
+            grep -q '</svg>' "$f" || { echo "TRUNCATED: $f"; exit 1; }
+            echo "ok $f ($(wc -c < "$f") bytes)"
+          done
+          for f in dist/snake.svg dist/snake-dark.svg; do
+            [ -s "$f" ] && echo "ok $f" || echo "WARN: $f missing (snake generator failed)"
+          done
+
+          if cmp -s dist/stats.svg dist/stats-dark.svg; then
+            echo "FAIL: light and dark cards are identical - theme not applied"
+            exit 1
+          fi
+
+          # A card that renders perfectly while reporting zero is the exact
+          # failure this whole change exists to eliminate, so assert the values.
+          total=$(sed -n 's/.*total=\([0-9]*\).*/\1/p' card-run.log)
+          longest=$(sed -n 's/.*longest=\([0-9]*\).*/\1/p' card-run.log)
+          langs=$(sed -n 's/.*langs=\(.*\)$/\1/p' card-run.log)
+          echo "parsed total=$total longest=$longest langs=$langs"
+
+          [ -n "$total" ] || { echo "FAIL: could not parse total from run log"; exit 1; }
+          [ "$total" -gt 0 ] || { echo "FAIL: total contributions is 0"; exit 1; }
+          [ "$longest" -gt 0 ] || { echo "FAIL: longest streak is 0"; exit 1; }
+          [ -n "$langs" ] || { echo "FAIL: no languages resolved"; exit 1; }
+
+          # The rendered number must match what the script computed, so a
+          # rendering bug cannot silently disagree with the data.
+          pretty=$(printf "%'d" "$total")
+          grep -q ">$pretty<" dist/stats.svg || {
+            echo "FAIL: total '$pretty' not found in the rendered card"; exit 1; }
+          echo "card asserts $pretty contributions, longest streak $longest"
+
+      - name: Publish to output branch
+        uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: output
+          build_dir: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
