@@ -63,7 +63,7 @@ I've been writing code professionally for a while now and building side projects
 </p>
 
 <p align="center">
-  <img src="https://streak-stats.demolab.com/?user=Khairul989&theme=tokyonight&hide_border=true" alt="Streak"/>
+  <img src="https://streak-stats.demolab.com/?user=Khairul989&theme=tokyonight&hide_border=true&disable_animations=true" alt="Streak"/>
 </p>
 
 ---
