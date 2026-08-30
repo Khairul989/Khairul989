@@ -64,14 +64,8 @@ I've been writing code professionally for a while and building side projects for
   </picture>
 </p>
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=Khairul989&theme=tokyonight&utcOffset=8"/>
-    <img height="200" src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=Khairul989&theme=default&utcOffset=8" alt="Productive time"/>
-  </picture>
-</p>
 
-<sub>The top card is generated daily by a workflow in this repo, straight from the GitHub API — no third-party service to go down. The commit-hours chart below it is still external.</sub>
+<sub>Generated daily by a workflow in this repo, straight from the GitHub API.</sub>
 
 ---
 
