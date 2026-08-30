@@ -135,42 +135,103 @@ const esc = (s) =>
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 
+// ---- monthly series for the activity ridge --------------------------------
+const months = [];
+{
+  const cursorDate = new Date();
+  cursorDate.setUTCDate(1);
+  for (let k = 11; k >= 0; k--) {
+    const d = new Date(cursorDate);
+    d.setUTCMonth(d.getUTCMonth() - k);
+    const key = d.toISOString().slice(0, 7);
+    months.push({
+      key,
+      label: d.toLocaleDateString("en-US", { month: "short", timeZone: "UTC" }),
+      count: past
+        .filter((x) => x.date.slice(0, 7) === key)
+        .reduce((s, x) => s + x.contributionCount, 0),
+    });
+  }
+}
+const peak = Math.max(1, ...months.map((m) => m.count));
+const busiest = months.reduce((a, b) => (b.count > a.count ? b : a), months[0]);
+
 const THEMES = {
-  dark: { bg: "#0d1117", border: "#30363d", fg: "#e6edf3", muted: "#8b949e", accent: "#58a6ff", track: "#21262d" },
-  light: { bg: "#ffffff", border: "#d1d9e0", fg: "#1f2328", muted: "#59636e", accent: "#0969da", track: "#eaeef2" },
+  dark: {
+    bg: "#0b0f14", panel: "#111820", border: "#1f2b38", grid: "#18222d",
+    fg: "#e8eef5", muted: "#7d8da0", faint: "#4d5b6b",
+    accent: "#4dd4ac", accent2: "#2d7d68", track: "#18222d",
+  },
+  light: {
+    bg: "#fbfcfd", panel: "#f2f5f8", border: "#dae2ea", grid: "#e7edf3",
+    fg: "#10171e", muted: "#5b6b7c", faint: "#93a2b2",
+    accent: "#0f9d76", accent2: "#8fe3cd", track: "#e7edf3",
+  },
 };
 
-const W = 820, H = 208, PAD = 44;
+const W = 860, H = 300, PAD = 36;
 const FONT = "-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif";
 const MONO = "ui-monospace,SFMono-Regular,Menlo,Consolas,monospace";
 
 function card(t) {
-  const stat = (x, value, label, sub) => `
-  <text x="${x}" y="80" text-anchor="middle" font-family="${MONO}" font-size="34" font-weight="700" fill="${t.accent}">${esc(value)}</text>
-  <text x="${x}" y="103" text-anchor="middle" font-size="12.5" font-weight="600" fill="${t.fg}">${esc(label)}</text>
-  <text x="${x}" y="120" text-anchor="middle" font-size="10.5" fill="${t.muted}">${esc(sub)}</text>`;
+  // --- activity ridge: 12 months, area + line + endpoint ---
+  const gx = PAD, gy = 96, gw = W - PAD * 2, gh = 96;
+  const step = gw / (months.length - 1);
+  const pts = months.map((m, i) => [gx + i * step, gy + gh - (m.count / peak) * gh]);
+  const path = pts.map((p, i) => `${i ? "L" : "M"}${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(" ");
+  const area = `${path} L${(gx + gw).toFixed(1)},${gy + gh} L${gx},${gy + gh} Z`;
+  const gridLines = [0, 0.5, 1]
+    .map((f) => `<line x1="${gx}" y1="${(gy + gh * f).toFixed(1)}" x2="${gx + gw}" y2="${(gy + gh * f).toFixed(1)}" stroke="${t.grid}" stroke-width="1"/>`)
+    .join("");
+  const labels = months
+    .map((m, i) => i % 2 === 0
+      ? `<text x="${(gx + i * step).toFixed(1)}" y="${gy + gh + 15}" text-anchor="middle" font-size="9.5" fill="${t.faint}">${esc(m.label)}</text>`
+      : "")
+    .join("");
+  const last = pts[pts.length - 1];
 
-  const BAR_W = W - PAD * 2;
+  // --- stat trio ---
+  const stat = (x, value, label) => `
+  <text x="${x}" y="58" font-family="${MONO}" font-size="30" font-weight="600" fill="${t.fg}" letter-spacing="-0.5">${esc(value)}</text>
+  <text x="${x}" y="74" font-size="10" font-weight="600" fill="${t.muted}" letter-spacing="0.7">${esc(label.toUpperCase())}</text>`;
+
+  // --- language bar ---
+  const by = 236, bh = 8;
   let bx = PAD, bars = "", legend = "", lx = PAD;
   for (const [name, v] of topLangs) {
-    const w = Math.max(3, (v.size / langTotal) * BAR_W - 2);
-    bars += `<rect x="${bx.toFixed(1)}" y="152" width="${w.toFixed(1)}" height="9" rx="4.5" fill="${esc(v.color)}"/>`;
+    const w = Math.max(3, (v.size / langTotal) * (W - PAD * 2) - 2);
+    bars += `<rect x="${bx.toFixed(1)}" y="${by}" width="${w.toFixed(1)}" height="${bh}" rx="4" fill="${esc(v.color)}"/>`;
     bx += w + 2;
-    const pct = ((v.size / langTotal) * 100).toFixed(1);
-    legend += `<circle cx="${(lx + 4).toFixed(1)}" cy="182" r="4.5" fill="${esc(v.color)}"/><text x="${(lx + 14).toFixed(1)}" y="186" font-size="11" fill="${t.muted}">${esc(name)} ${pct}%</text>`;
-    lx += 20 + (name.length * 6.3) + 36;
+    const pct = ((v.size / langTotal) * 100).toFixed(0);
+    legend += `<circle cx="${(lx + 3).toFixed(1)}" cy="${by + 27}" r="3.5" fill="${esc(v.color)}"/><text x="${(lx + 11).toFixed(1)}" y="${by + 30}" font-size="10" fill="${t.muted}">${esc(name)} <tspan fill="${t.faint}">${pct}%</tspan></text>`;
+    lx += 18 + name.length * 5.9 + 26;
   }
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" font-family="${FONT}" role="img" aria-label="${esc(meta.login)}: ${fmt(total)} contributions, current streak ${current} days, longest streak ${longest} days">
-  <rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="10" fill="${t.bg}" stroke="${t.border}"/>
-  <text x="${PAD}" y="38" font-size="13" font-weight="600" fill="${t.fg}">${esc(meta.login)}</text>
-  <text x="${W - PAD}" y="38" text-anchor="end" font-size="11" fill="${t.muted}">updated ${esc(nice(today))}</text>
-  <line x1="${PAD}" y1="52" x2="${W - PAD}" y2="52" stroke="${t.border}"/>
-${stat(W * 0.2, fmt(total), "Total contributions", `since ${nice(past.find((d) => d.contributionCount > 0)?.date)}`)}
-${stat(W * 0.5, String(current), "Current streak", current ? `${nice(currentStart)} – ${nice(currentEnd)}` : "no active streak")}
-${stat(W * 0.8, String(longest), "Longest streak", `${nice(longestStart)} – ${nice(longestEnd)}`)}
-  <text x="${PAD}" y="142" font-size="11" font-weight="600" fill="${t.fg}">Languages by bytes, ${sawPrivate ? "all my" : "public"} repos</text>
-  <rect x="${PAD}" y="152" width="${BAR_W}" height="9" rx="4.5" fill="${t.track}"/>
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" font-family="${FONT}" role="img" aria-label="${esc(meta.login)}: ${fmt(total)} contributions, current streak ${current}, longest ${longest}, busiest month ${esc(busiest.label)}">
+  <rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="14" fill="${t.bg}" stroke="${t.border}"/>
+  <rect x="0.5" y="0.5" width="4" height="${H - 1}" rx="2" fill="${t.accent}"/>
+
+  <text x="${PAD}" y="28" font-size="11" font-weight="700" fill="${t.muted}" letter-spacing="1.4">CONTRIBUTION ACTIVITY</text>
+  <text x="${W - PAD}" y="28" text-anchor="end" font-size="10" fill="${t.faint}">${esc(nice(today))}</text>
+
+${stat(PAD, fmt(total), "total since " + nice(past.find((d) => d.contributionCount > 0)?.date))}
+${stat(PAD + 250, String(current), current ? "day streak, live" : "day streak")}
+${stat(PAD + 400, String(longest), "longest run")}
+${stat(PAD + 560, fmt(busiest.count), "peak month, " + busiest.label)}
+
+  ${gridLines}
+  <defs><linearGradient id="fill-${t.accent.slice(1)}" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="${t.accent}" stop-opacity="0.38"/>
+    <stop offset="100%" stop-color="${t.accent}" stop-opacity="0.02"/>
+  </linearGradient></defs>
+  <path d="${area}" fill="url(#fill-${t.accent.slice(1)})"/>
+  <path d="${path}" fill="none" stroke="${t.accent}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="3.5" fill="${t.accent}"/>
+  <circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="7" fill="none" stroke="${t.accent}" stroke-opacity="0.3" stroke-width="2"/>
+  ${labels}
+
+  <text x="${PAD}" y="${by - 10}" font-size="10" font-weight="600" fill="${t.muted}" letter-spacing="0.7">LANGUAGES BY BYTES, ${sawPrivate ? "ALL MY" : "PUBLIC"} REPOS</text>
+  <rect x="${PAD}" y="${by}" width="${W - PAD * 2}" height="${bh}" rx="4" fill="${t.track}"/>
 ${bars}${legend}
 </svg>`;
 }
