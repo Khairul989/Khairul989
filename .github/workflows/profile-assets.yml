@@ -82,11 +82,13 @@ jobs:
           [ -n "$langs" ] || { echo "FAIL: no languages resolved"; exit 1; }
 
           # The rendered number must match what the script computed, so a
-          # rendering bug cannot silently disagree with the data.
-          pretty=$(printf "%'d" "$total")
-          grep -q ">$pretty<" dist/stats.svg || {
-            echo "FAIL: total '$pretty' not found in the rendered card"; exit 1; }
-          echo "card asserts $pretty contributions, longest streak $longest"
+          # rendering bug cannot silently disagree with the data. Compare on
+          # digits only: the card is formatted en-US ("5,237") while the runner
+          # shell has no thousands separator, so printf "%'d" would not match.
+          rendered=$(grep -o '>[0-9][0-9,]*<' dist/stats.svg | tr -d '><,' | head -1)
+          [ "$rendered" = "$total" ] || {
+            echo "FAIL: card renders '$rendered' but the script computed '$total'"; exit 1; }
+          echo "card asserts $rendered contributions, longest streak $longest"
 
       - name: Publish to output branch
         uses: crazy-max/ghaction-github-pages@v4
