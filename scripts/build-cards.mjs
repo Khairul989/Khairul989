@@ -91,19 +91,21 @@ for (let i = past.length - 1; i >= 0; i--) {
 
 // ---- languages by bytes, own non-fork repos -------------------------------
 const langs = {};
+let sawPrivate = false;
 let cursor = null;
 for (;;) {
   const d = await gql(
     `query($login:String!,$c:String){ user(login:$login){
        repositories(first:100,after:$c,ownerAffiliations:OWNER,isFork:false){
          pageInfo{ hasNextPage endCursor }
-         nodes{ isArchived languages(first:10,orderBy:{field:SIZE,direction:DESC}){
+         nodes{ isArchived isPrivate languages(first:10,orderBy:{field:SIZE,direction:DESC}){
            edges{ size node{ name color } } } } } } }`,
     { login: USER, c: cursor },
   );
   const repos = d.user.repositories;
   for (const r of repos.nodes) {
     if (r.isArchived) continue;
+    if (r.isPrivate) sawPrivate = true;
     for (const e of r.languages.edges) {
       langs[e.node.name] ??= { size: 0, color: e.node.color || "#8b949e" };
       langs[e.node.name].size += e.size;
@@ -167,7 +169,7 @@ function card(t) {
 ${stat(W * 0.2, fmt(total), "Total contributions", `since ${nice(past.find((d) => d.contributionCount > 0)?.date)}`)}
 ${stat(W * 0.5, String(current), "Current streak", current ? `${nice(currentStart)} – ${nice(currentEnd)}` : "no active streak")}
 ${stat(W * 0.8, String(longest), "Longest streak", `${nice(longestStart)} – ${nice(longestEnd)}`)}
-  <text x="${PAD}" y="142" font-size="11" font-weight="600" fill="${t.fg}">Languages by bytes, own repos</text>
+  <text x="${PAD}" y="142" font-size="11" font-weight="600" fill="${t.fg}">Languages by bytes, ${sawPrivate ? "all my" : "public"} repos</text>
   <rect x="${PAD}" y="152" width="${BAR_W}" height="9" rx="4.5" fill="${t.track}"/>
 ${bars}${legend}
 </svg>`;
