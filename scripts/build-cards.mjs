@@ -135,37 +135,47 @@ const esc = (s) =>
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 
-// ---- monthly series for the activity ridge --------------------------------
+// ---- derived series -------------------------------------------------------
 const months = [];
 {
-  const cursorDate = new Date();
-  cursorDate.setUTCDate(1);
+  const c = new Date();
+  c.setUTCDate(1);
   for (let k = 11; k >= 0; k--) {
-    const d = new Date(cursorDate);
+    const d = new Date(c);
     d.setUTCMonth(d.getUTCMonth() - k);
     const key = d.toISOString().slice(0, 7);
     months.push({
       key,
       label: d.toLocaleDateString("en-US", { month: "short", timeZone: "UTC" }),
-      count: past
-        .filter((x) => x.date.slice(0, 7) === key)
-        .reduce((s, x) => s + x.contributionCount, 0),
+      count: past.filter((x) => x.date.slice(0, 7) === key)
+                 .reduce((s, x) => s + x.contributionCount, 0),
     });
   }
 }
 const peak = Math.max(1, ...months.map((m) => m.count));
 const busiest = months.reduce((a, b) => (b.count > a.count ? b : a), months[0]);
 
+// trailing 365 days: how consistent, not how lucky
+const yearAgo = new Date(Date.now() - 364 * 864e5).toISOString().slice(0, 10);
+const trailing = past.filter((d) => d.date >= yearAgo);
+const activeDays = trailing.filter((d) => d.contributionCount > 0).length;
+
+// yearly totals, for the growth line
+const years = [...new Set(past.map((d) => d.date.slice(0, 4)))].sort().slice(-3);
+const yearly = years.map((y) => ({
+  y,
+  n: past.filter((d) => d.date.startsWith(y))
+         .reduce((s, d) => s + d.contributionCount, 0),
+}));
+
 const THEMES = {
   dark: {
-    bg: "#0b0f14", panel: "#111820", border: "#1f2b38", grid: "#18222d",
-    fg: "#e8eef5", muted: "#7d8da0", faint: "#4d5b6b",
-    accent: "#4dd4ac", accent2: "#2d7d68", track: "#18222d",
+    bg: "#0b0f14", border: "#1f2b38", grid: "#18222d",
+    fg: "#e8eef5", muted: "#7d8da0", faint: "#4d5b6b", accent: "#4dd4ac",
   },
   light: {
-    bg: "#fbfcfd", panel: "#f2f5f8", border: "#dae2ea", grid: "#e7edf3",
-    fg: "#10171e", muted: "#5b6b7c", faint: "#93a2b2",
-    accent: "#0f9d76", accent2: "#8fe3cd", track: "#e7edf3",
+    bg: "#fbfcfd", border: "#dae2ea", grid: "#e7edf3",
+    fg: "#10171e", muted: "#5b6b7c", faint: "#93a2b2", accent: "#0f9d76",
   },
 };
 
@@ -174,65 +184,60 @@ const FONT = "-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-ser
 const MONO = "ui-monospace,SFMono-Regular,Menlo,Consolas,monospace";
 
 function card(t) {
-  // --- activity ridge: 12 months, area + line + endpoint ---
-  const gx = PAD, gy = 96, gw = W - PAD * 2, gh = 96;
+  const gx = PAD, gy = 100, gw = W - PAD * 2, gh = 126;
   const step = gw / (months.length - 1);
   const pts = months.map((m, i) => [gx + i * step, gy + gh - (m.count / peak) * gh]);
-  const path = pts.map((p, i) => `${i ? "L" : "M"}${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(" ");
-  const area = `${path} L${(gx + gw).toFixed(1)},${gy + gh} L${gx},${gy + gh} Z`;
-  const gridLines = [0, 0.5, 1]
-    .map((f) => `<line x1="${gx}" y1="${(gy + gh * f).toFixed(1)}" x2="${gx + gw}" y2="${(gy + gh * f).toFixed(1)}" stroke="${t.grid}" stroke-width="1"/>`)
+  const line = pts.map((p, i) => `${i ? "L" : "M"}${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(" ");
+  const area = `${line} L${(gx + gw).toFixed(1)},${gy + gh} L${gx},${gy + gh} Z`;
+  const grid = [0, 0.5, 1]
+    .map((f) => `<line x1="${gx}" y1="${(gy + gh * f).toFixed(1)}" x2="${gx + gw}" y2="${(gy + gh * f).toFixed(1)}" stroke="${t.grid}"/>`)
     .join("");
   const labels = months
     .map((m, i) => i % 2 === 0
-      ? `<text x="${(gx + i * step).toFixed(1)}" y="${gy + gh + 15}" text-anchor="middle" font-size="9.5" fill="${t.faint}">${esc(m.label)}</text>`
-      : "")
-    .join("");
+      ? `<text x="${(gx + i * step).toFixed(1)}" y="${gy + gh + 16}" text-anchor="middle" font-size="9.5" fill="${t.faint}">${esc(m.label)}</text>`
+      : "").join("");
   const last = pts[pts.length - 1];
 
-  // --- stat trio ---
   const stat = (x, value, label) => `
-  <text x="${x}" y="58" font-family="${MONO}" font-size="30" font-weight="600" fill="${t.fg}" letter-spacing="-0.5">${esc(value)}</text>
-  <text x="${x}" y="74" font-size="10" font-weight="600" fill="${t.muted}" letter-spacing="0.7">${esc(label.toUpperCase())}</text>`;
+  <text x="${x}" y="60" font-family="${MONO}" font-size="29" font-weight="600" fill="${t.fg}" letter-spacing="-0.5">${esc(value)}</text>
+  <text x="${x}" y="77" font-size="9.5" font-weight="600" fill="${t.muted}" letter-spacing="0.8">${esc(label.toUpperCase())}</text>`;
 
-  // --- language bar ---
-  const by = 236, bh = 8;
-  let bx = PAD, bars = "", legend = "", lx = PAD;
-  for (const [name, v] of topLangs) {
-    const w = Math.max(3, (v.size / langTotal) * (W - PAD * 2) - 2);
-    bars += `<rect x="${bx.toFixed(1)}" y="${by}" width="${w.toFixed(1)}" height="${bh}" rx="4" fill="${esc(v.color)}"/>`;
-    bx += w + 2;
-    const pct = ((v.size / langTotal) * 100).toFixed(0);
-    legend += `<circle cx="${(lx + 3).toFixed(1)}" cy="${by + 27}" r="3.5" fill="${esc(v.color)}"/><text x="${(lx + 11).toFixed(1)}" y="${by + 30}" font-size="10" fill="${t.muted}">${esc(name)} <tspan fill="${t.faint}">${pct}%</tspan></text>`;
-    lx += 18 + name.length * 5.9 + 26;
-  }
+  // growth line: the part of the story a single total cannot tell
+  let gxx = PAD, growth = "";
+  yearly.forEach((v, i) => {
+    growth += `<text x="${gxx}" y="${H - 20}" font-size="10.5" fill="${t.muted}">${v.y} <tspan font-family="${MONO}" font-weight="600" fill="${i === yearly.length - 1 ? t.accent : t.fg}">${fmt(v.n)}</tspan></text>`;
+    gxx += 78;
+    if (i < yearly.length - 1) {
+      growth += `<text x="${gxx - 16}" y="${H - 20}" font-size="10.5" fill="${t.faint}">→</text>`;
+    }
+  });
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" font-family="${FONT}" role="img" aria-label="${esc(meta.login)}: ${fmt(total)} contributions, current streak ${current}, longest ${longest}, busiest month ${esc(busiest.label)}">
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" font-family="${FONT}" role="img" aria-label="${esc(meta.login)}: ${fmt(total)} contributions, ${activeDays} of 365 days active, longest run ${longest}, peak month ${esc(busiest.label)} at ${busiest.count}">
   <rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="14" fill="${t.bg}" stroke="${t.border}"/>
   <rect x="0.5" y="0.5" width="4" height="${H - 1}" rx="2" fill="${t.accent}"/>
 
-  <text x="${PAD}" y="28" font-size="11" font-weight="700" fill="${t.muted}" letter-spacing="1.4">CONTRIBUTION ACTIVITY</text>
-  <text x="${W - PAD}" y="28" text-anchor="end" font-size="10" fill="${t.faint}">${esc(nice(today))}</text>
+  <text x="${PAD}" y="30" font-size="10.5" font-weight="700" fill="${t.muted}" letter-spacing="1.5">CONTRIBUTION ACTIVITY</text>
+  <text x="${W - PAD}" y="30" text-anchor="end" font-size="10" fill="${t.faint}">${esc(nice(today))}</text>
 
 ${stat(PAD, fmt(total), "total since " + nice(past.find((d) => d.contributionCount > 0)?.date))}
-${stat(PAD + 250, String(current), current ? "day streak, live" : "day streak")}
-${stat(PAD + 400, String(longest), "longest run")}
-${stat(PAD + 560, fmt(busiest.count), "peak month, " + busiest.label)}
+${stat(PAD + 240, `${activeDays}/365`, "days active, past year")}
+${stat(PAD + 450, String(longest), "longest run")}
+${stat(PAD + 610, fmt(busiest.count), "peak month, " + busiest.label)}
 
-  ${gridLines}
-  <defs><linearGradient id="fill-${t.accent.slice(1)}" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0%" stop-color="${t.accent}" stop-opacity="0.38"/>
+  ${grid}
+  <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="${t.accent}" stop-opacity="0.36"/>
     <stop offset="100%" stop-color="${t.accent}" stop-opacity="0.02"/>
   </linearGradient></defs>
-  <path d="${area}" fill="url(#fill-${t.accent.slice(1)})"/>
-  <path d="${path}" fill="none" stroke="${t.accent}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="${area}" fill="url(#g)"/>
+  <path d="${line}" fill="none" stroke="${t.accent}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
   <circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="3.5" fill="${t.accent}"/>
-  <circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="7" fill="none" stroke="${t.accent}" stroke-opacity="0.3" stroke-width="2"/>
+  <circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="7.5" fill="none" stroke="${t.accent}" stroke-opacity="0.28" stroke-width="2"/>
   ${labels}
 
-  <text x="${PAD}" y="${by - 10}" font-size="10" font-weight="600" fill="${t.muted}" letter-spacing="0.7">LANGUAGES BY BYTES, ${sawPrivate ? "ALL MY" : "PUBLIC"} REPOS</text>
-  <rect x="${PAD}" y="${by}" width="${W - PAD * 2}" height="${bh}" rx="4" fill="${t.track}"/>
-${bars}${legend}
+  <line x1="${PAD}" y1="${H - 40}" x2="${W - PAD}" y2="${H - 40}" stroke="${t.grid}"/>
+  ${growth}
+  <text x="${W - PAD}" y="${H - 20}" text-anchor="end" font-size="10" fill="${t.faint}">contributions per year</text>
 </svg>`;
 }
 
@@ -240,5 +245,5 @@ mkdirSync("dist", { recursive: true });
 writeFileSync("dist/stats.svg", card(THEMES.light));
 writeFileSync("dist/stats-dark.svg", card(THEMES.dark));
 console.log(
-  `ok total=${total} current=${current} longest=${longest} langs=${topLangs.map((l) => l[0]).join(",")}`,
+  `ok total=${total} current=${current} longest=${longest} active=${activeDays} langs=${topLangs.map((l) => l[0]).join(",")}`,
 );
