@@ -28,12 +28,13 @@ I've been writing code professionally for a while and building side projects for
 
 ## Tech I reach for
 
-| | |
-|---|---|
-| **Mobile** | Flutter · Dart · Swift · Kotlin |
-| **Web** | Next.js · TypeScript · React · Tailwind |
-| **Backend** | Laravel · NestJS · Spring Boot · Rust |
-| **Data & tools** | MySQL · PostgreSQL · Firebase · Docker · Git |
+**Mobile** &nbsp; `Flutter` `Dart` `Swift` `Kotlin`
+
+**Web** &nbsp; `Next.js` `TypeScript` `React` `Tailwind`
+
+**Backend** &nbsp; `Laravel` `NestJS` `Spring Boot` `Rust`
+
+**Data & tools** &nbsp; `MySQL` `PostgreSQL` `Firebase` `Docker` `Git`
 
 ---
 
