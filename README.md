@@ -71,7 +71,7 @@ I've been writing code professionally for a while and building side projects for
   </picture>
 </p>
 
-<sub>Cards above are generated daily by a workflow in this repo — no third-party service to go down.</sub>
+<sub>The top card is generated daily by a workflow in this repo, straight from the GitHub API — no third-party service to go down. The commit-hours chart below it is still external.</sub>
 
 ---
 
