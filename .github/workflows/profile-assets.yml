@@ -33,11 +33,21 @@ jobs:
             dist/snake.svg
             dist/snake-dark.svg?palette=github-dark
 
+      - name: Reclaim dist ownership
+        # Platane/snk runs in Docker as root and leaves dist/ owned by root,
+        # so the runner user cannot write the cards into it (EACCES).
+        run: |
+          mkdir -p dist
+          sudo chown -R "$(id -u):$(id -g)" dist
+          ls -ld dist
+
       - name: Generate stat cards
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           USER_LOGIN: ${{ github.repository_owner }}
-        run: node scripts/build-cards.mjs | tee card-run.log
+        run: |
+          set -o pipefail   # without this, tee's exit status masks a node crash
+          node scripts/build-cards.mjs | tee card-run.log
 
       - name: Verify the cards say something true
         run: |
