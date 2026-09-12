@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="300" viewBox="0 0 860 300" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" role="img" aria-label="Khairul989: 5,939 contributions, 262 of 365 days active, longest run 61, peak month Jun at 963">
+  <rect x="0.5" y="0.5" width="859" height="299" rx="14" fill="#0b0f14" stroke="#1f2b38"/>
+  <rect x="0.5" y="0.5" width="4" height="299" rx="2" fill="#4dd4ac"/>
+
+  <text x="36" y="30" font-size="10.5" font-weight="700" fill="#7d8da0" letter-spacing="1.5">CONTRIBUTION ACTIVITY</text>
+  <text x="824" y="30" text-anchor="end" font-size="10" fill="#4d5b6b">Sep 12, 2026</text>
+
+
+  <text x="36" y="60" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="29" font-weight="600" fill="#e8eef5" letter-spacing="-0.5">5,939</text>
+  <text x="36" y="77" font-size="9.5" font-weight="600" fill="#7d8da0" letter-spacing="0.8">TOTAL SINCE JUN 2, 2020</text>
+
+  <text x="276" y="60" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="29" font-weight="600" fill="#e8eef5" letter-spacing="-0.5">262/365</text>
+  <text x="276" y="77" font-size="9.5" font-weight="600" fill="#7d8da0" letter-spacing="0.8">DAYS ACTIVE, PAST YEAR</text>
+
+  <text x="486" y="60" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="29" font-weight="600" fill="#e8eef5" letter-spacing="-0.5">61</text>
+  <text x="486" y="77" font-size="9.5" font-weight="600" fill="#7d8da0" letter-spacing="0.8">LONGEST RUN</text>
+
+  <text x="646" y="60" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="29" font-weight="600" fill="#e8eef5" letter-spacing="-0.5">963</text>
+  <text x="646" y="77" font-size="9.5" font-weight="600" fill="#7d8da0" letter-spacing="0.8">PEAK MONTH, JUN</text>
+
+  <line x1="36" y1="100.0" x2="824" y2="100.0" stroke="#18222d"/><line x1="36" y1="163.0" x2="824" y2="163.0" stroke="#18222d"/><line x1="36" y1="226.0" x2="824" y2="226.0" stroke="#18222d"/>
+  <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#4dd4ac" stop-opacity="0.36"/>
+    <stop offset="100%" stop-color="#4dd4ac" stop-opacity="0.02"/>
+  </linearGradient></defs>
+  <path d="M36.0,207.9 L107.6,225.1 L179.3,218.5 L250.9,203.1 L322.5,205.9 L394.2,158.1 L465.8,190.0 L537.5,177.9 L609.1,100.0 L680.7,131.1 L752.4,122.5 L824.0,145.0 L824.0,226 L36,226 Z" fill="url(#g)"/>
+  <path d="M36.0,207.9 L107.6,225.1 L179.3,218.5 L250.9,203.1 L322.5,205.9 L394.2,158.1 L465.8,190.0 L537.5,177.9 L609.1,100.0 L680.7,131.1 L752.4,122.5 L824.0,145.0" fill="none" stroke="#4dd4ac" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="824.0" cy="145.0" r="3.5" fill="#4dd4ac"/>
+  <circle cx="824.0" cy="145.0" r="7.5" fill="none" stroke="#4dd4ac" stroke-opacity="0.28" stroke-width="2"/>
+  <text x="36.0" y="242" text-anchor="middle" font-size="9.5" fill="#4d5b6b">Oct</text><text x="179.3" y="242" text-anchor="middle" font-size="9.5" fill="#4d5b6b">Dec</text><text x="322.5" y="242" text-anchor="middle" font-size="9.5" fill="#4d5b6b">Feb</text><text x="465.8" y="242" text-anchor="middle" font-size="9.5" fill="#4d5b6b">Apr</text><text x="609.1" y="242" text-anchor="middle" font-size="9.5" fill="#4d5b6b">Jun</text><text x="752.4" y="242" text-anchor="middle" font-size="9.5" fill="#4d5b6b">Aug</text>
+
+  <line x1="36" y1="260" x2="824" y2="260" stroke="#18222d"/>
+  <text x="36" y="280" font-size="10.5" fill="#7d8da0">2024 <tspan font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-weight="600" fill="#e8eef5">96</tspan></text><text x="98" y="280" font-size="10.5" fill="#4d5b6b">→</text><text x="114" y="280" font-size="10.5" fill="#7d8da0">2025 <tspan font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-weight="600" fill="#e8eef5">931</tspan></text><text x="176" y="280" font-size="10.5" fill="#4d5b6b">→</text><text x="192" y="280" font-size="10.5" fill="#7d8da0">2026 <tspan font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-weight="600" fill="#4dd4ac">4,589</tspan></text>
+  <text x="824" y="280" text-anchor="end" font-size="10" fill="#4d5b6b">contributions per year</text>
+</svg>
